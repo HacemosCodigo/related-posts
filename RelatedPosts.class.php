@@ -63,7 +63,7 @@
 		 */
 		public function display_related_posts_metabox($post)
 		{
-			?><div class="related-container">
+			?><div id="related-container" class="categorydiv">
 				<ul class="related-posts-tabs">
 					<li class="tabs"><a href="#posts-select">Seleccionar</a></li>
 					<li><a href="#posts-titles">Por Titulo</a></li>

@@ -14,7 +14,7 @@
 
 		RelatedPosts.toggleContent = function (active){
 			var content = $(active).attr('href');
-			$('.related-container .tabs-panel').hide();
+			$('#related-container .tabs-panel').hide();
 			$(content).show();
 		}
 
