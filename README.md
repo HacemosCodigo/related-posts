@@ -1,13 +1,7 @@
 WP Related Posts
 ===================
-  _                ___  ___                  _ _           _
- | |               |  \/  |                 (_) |         | |
- | |     ___  ___  | .  . | __ _  __ _ _   _ _| | __ _  __| | ___  _ __ ___  ___
- | |    / _ \/ __| | |\/| |/ _` |/ _` | | | | | |/ _` |/ _` |/ _ \| '__/ _ \/ __|
- | |___| (_) \__ \ | |  | | (_| | (_| | |_| | | | (_| | (_| | (_) | | |  __/\__ \
- \_____/\___/|___/ \_|  |_/\__,_|\__, |\__,_|_|_|\__,_|\__,_|\___/|_|  \___||___/
-                                    | |
-                                    |_|
+![screenshot](https://raw.github.com/HacemosCodigo/related-posts/master/img/screenshot.png)
+
 WordPress related posts plugin
 http://hacemoscodigo.com
 
@@ -44,5 +38,3 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html<br />
 	3. Mostrar los posts.
 
 ### Screenshots
-
-![screenshot](https://raw.github.com/HacemosCodigo/related-posts/master/img/screenshot.png)
