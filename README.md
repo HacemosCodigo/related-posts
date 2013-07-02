@@ -23,12 +23,12 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html<br />
 
 ### Installation
 
-	☻ Poner el folder related-posts dentro del directorio de plugins.
+	➡ Poner el folder related-posts dentro del directorio de plugins.
 
-	☻ Clonar el repositorio:
+	➡ Clonar el repositorio:
 	$ git clone git@github.com:HacemosCodigo/related-posts.git related-posts
 
-	☻ Clonar como submodule en otro repositorio existente:
+	➡ Clonar como submodule en otro repositorio existente:
 	$ git submodule add git@github.com:HacemosCodigo/related-posts.git path_to_plugins_dir/related-posts
 
 ### Instrucciones
