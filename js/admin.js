@@ -6,8 +6,9 @@
 
 		window.RelatedPosts = {};
 
-		RelatedPosts.toggleTabs = function (active) {
-			$('ul.related-posts-tabs li').removeClass('tabs');
+
+		RelatedPosts.toggleTabs = function (active){
+			$('ul#related li').removeClass('tabs');
 			$(active).parent().addClass('tabs');
 			return this;
 		};
@@ -28,7 +29,7 @@
 			return ajax_response;
 		};
 
-		$('ul.related-posts-tabs a').on('click', function (e) {
+		$('ul#related a').on('click', function (e) {
 			e.preventDefault();
 			if( $(this).attr('href') === '#posts-titles' ){
 				var post_title = $('div#titlewrap #title').val();

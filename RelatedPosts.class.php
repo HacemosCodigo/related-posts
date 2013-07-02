@@ -66,9 +66,9 @@
 		public function display_related_posts_metabox($post)
 		{
 			?><div id="related-container" class="categorydiv">
-				<ul class="related-posts-tabs">
+				<ul id="related" class="category-tabs">
 					<li class="tabs"><a href="#posts-select">Seleccionar</a></li>
-					<li><a href="#posts-titles">Por Titulo</a></li>
+					<li><a href="#posts-titles">Por Titulo  <span id="spinner_related" class="spinner"></span></a></li>
 				</ul>
 
 				<div id="posts-select" class="tabs-panel">
@@ -76,13 +76,28 @@
 						<input type="text" class="form-input-tip" size="20" autocomplete="off">
 						<input type="button" class="button" value="Add">
 					</p>
+
+					<div id="tagchecklist_related" class="tagchecklist">
+						<span>
+							<a id="post_tag-check-num-0" class="ntdelbutton">X</a>
+							&nbsp;La cabeza de Xbox se va a Zynga
+						</span>
+						<span>
+							<a id="post_tag-check-num-1" class="ntdelbutton">X</a>
+							&nbsp;¿Cómo sacarle el mayor provecho a la batería de tu celular?
+						</span>
+						<span>
+							<a id="post_tag-check-num-2" class="ntdelbutton">X</a>
+							&nbsp;Científicos crean un traje capaz de aumentar la fuerza humana
+						</span>
+					</div><!-- tagchecklist -->
 				</div>
 
 				<div id="posts-titles" class="tabs-panel" style="display:none;">
-					<ul>
-						<li><label class="selectit"><input value="1" type="checkbox" name="post_related[]" checked="checked"> Title 1</label></li>
-						<li><label class="selectit"><input value="2" type="checkbox" name="post_related[]"> Title 2</label></li>
-						<li><label class="selectit"><input value="3" type="checkbox" name="post_related[]"> Title 3</label></li>
+					<ul class="categorychecklist form-no-clear">
+						<li class="popular-category"><label class="selectit "><input value="1" type="checkbox" name="post_related[]" checked="checked"> Title 1</label></li>
+						<li class="popular-category"><label class="selectit "><input value="2" type="checkbox" name="post_related[]"> Title 2</label></li>
+						<li class="popular-category"><label class="selectit "><input value="3" type="checkbox" name="post_related[]"> Title 3</label></li>
 					</ul>
 				</div>
 			</div><?php
