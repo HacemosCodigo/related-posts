@@ -66,7 +66,7 @@
 			?><div id="related-container" class="categorydiv">
 				<ul id="related" class="category-tabs">
 					<li class="tabs"><a href="#posts-select">Seleccionar</a></li>
-					<li><a href="#posts-titles">Por Titulo</a></li>
+					<li><a href="#posts-titles">Por Titulo  <span id="spinner_related" class="spinner"></span></a></li>
 				</ul>
 
 				<div id="posts-select" class="tabs-panel">

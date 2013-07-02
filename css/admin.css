@@ -7,3 +7,7 @@
   margin-right: 0;
   float: none;
 }
+#spinner_related {
+  display: block;
+  margin: 0;
+}
