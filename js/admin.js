@@ -7,7 +7,7 @@
 		window.RelatedPosts = {};
 
 		RelatedPosts.toggleTabs = function (active){
-			$('ul.related-posts-tabs li').removeClass('tabs');
+			$('ul#related li').removeClass('tabs');
 			$(active).parent().addClass('tabs');
 			return active;
 		}
@@ -18,7 +18,7 @@
 			$(content).show();
 		}
 
-		$('ul.related-posts-tabs a').on('click', function (e) {
+		$('ul#related a').on('click', function (e) {
 			e.preventDefault();
 			RelatedPosts.toggleTabs( this );
 			RelatedPosts.toggleContent( this );
