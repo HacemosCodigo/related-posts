@@ -32,12 +32,53 @@
 	});
 
 
+
 	function get_similar_posts(){
 		global $wpdb;
 		$results = $wpdb->get_results(
-			"query", OBJECT
+			"FALTA ESTE QUERY", OBJECT
 		);
 		echo json_encode($results);
+		exit;
 	}
 	add_action('wp_ajax_get_similar_posts', 'get_similar_posts');
 	add_action('wp_ajax_nopriv_get_similar_posts', 'get_similar_posts');
+
+
+
+	function get_all_posts(){
+		global $wpdb;
+		$results = $wpdb->get_results(
+			"SELECT ID as value, post_title as label FROM wp_posts
+				WHERE post_status = 'publish'
+					AND post_type != 'attachment';", OBJECT
+		);
+		echo json_encode($results);
+		exit;
+	}
+	add_action('wp_ajax_get_all_posts', 'get_all_posts');
+	add_action('wp_ajax_nopriv_get_all_posts', 'get_all_posts');
+
+
+
+	function get_similar_titles(){
+		global $wpdb;
+		$search = isset($_POST['search']) ? $_POST['search'] : '';
+		$results = $wpdb->get_results(
+			"SELECT ID, post_title FROM wp_posts
+				WHERE post_status = 'publish'
+					AND post_type != 'attachment'
+					AND post_title REGEXP '$search'
+					GROUP BY ID
+						ORDER BY CASE
+							WHEN post_title LIKE '$search%'      THEN 0
+							WHEN post_title LIKE '% %$search% %' THEN 1
+							WHEN post_title LIKE '%$search'      THEN 2
+							ELSE 3
+						END, post_title LIMIT 10;", OBJECT
+		);
+		echo json_encode($results);
+		exit;
+	}
+	add_action('wp_ajax_get_similar_titles', 'get_similar_titles');
+	add_action('wp_ajax_nopriv_get_similar_titles', 'get_similar_titles');

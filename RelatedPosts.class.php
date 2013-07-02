@@ -10,15 +10,15 @@
 
 
 
-		public function __construct($post_types)
+		public function __construct()
 		{
 			global $wpdb;
-			$this->wpdb       = &$wpdb;
-			$this->post_types = $post_types;
+			$this->wpdb = &$wpdb;
 
 			// Load admin style sheet and JavaScript.
 			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_styles' ) );
 			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_scripts' ) );
+			add_action( 'admin_enqueue_scripts', array( $this, 'localize_admin_scripts' ) );
 		}
 
 
@@ -36,9 +36,20 @@
 		 */
 		public function enqueue_admin_scripts()
 		{
-			wp_enqueue_script( 'mqrp-admin-script', plugins_url('js/admin.js', __FILE__ ), array('jquery'), false, true );
+			wp_enqueue_script( 'jquery-ui-autocomplete' );
+			wp_enqueue_script( 'mqrp-admin-script', plugins_url('js/admin.js', __FILE__ ), array('jquery', 'jquery-ui-autocomplete'), false, true );
+		}
+
+
+		/**
+		 * Localize admin scripts.
+		 */
+		public function localize_admin_scripts()
+		{
 			wp_localize_script('mqrp-admin-script', 'ajax_url',  get_bloginfo('wpurl').'/wp-admin/admin-ajax.php');
 		}
+
+
 
 
 		/**
@@ -73,7 +84,8 @@
 
 				<div id="posts-select" class="tabs-panel">
 					<p>
-						<input type="text" class="form-input-tip" size="20" autocomplete="off">
+						<input type="text" id="search-title" class="form-input-tip" size="20" autocomplete="off">
+						<input type="hidden" id="search-title-id" />
 						<input type="button" class="button" value="Add">
 					</p>
 

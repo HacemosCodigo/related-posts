@@ -8,6 +8,9 @@
   float: none;
 }
 #spinner_related {
-  display: block;
+  display: none;
   margin: 0;
+}
+.ui-autocomplete-loading {
+  background: #ffffff url(../img/wpspin_light.gif) right center no-repeat;
 }
