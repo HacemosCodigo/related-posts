@@ -14,12 +14,16 @@
 
 		RelatedPosts.toggleContent = function (active){
 			var content = $(active).attr('href');
-			$('.related-container .tabs-panel').hide();
+			$('#related-container .tabs-panel').hide();
 			$(content).show();
 		}
 
 		$('ul.related-posts-tabs a').on('click', function (e) {
 			e.preventDefault();
+			if( $(this).attr('href') ){
+
+			}
+
 			RelatedPosts.toggleTabs( this );
 			RelatedPosts.toggleContent( this );
 		});
