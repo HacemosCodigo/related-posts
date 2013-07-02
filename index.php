@@ -30,3 +30,14 @@
 	add_action('admin_init', function(){
 		$related_posts = new RelatedPosts();
 	});
+
+
+	function get_similar_posts(){
+		global $wpdb;
+		$results = $wpdb->get_results(
+			"query", OBJECT
+		);
+		echo json_encode($results);
+	}
+	add_action('wp_ajax_get_similar_posts', 'get_similar_posts');
+	add_action('wp_ajax_nopriv_get_similar_posts', 'get_similar_posts');

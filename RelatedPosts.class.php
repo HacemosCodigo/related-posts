@@ -5,15 +5,16 @@
 	 */
 	class RelatedPosts {
 
-		public $related;
+		public $related, $post_types;
 		private $wpdb;
 
 
 
-		public function __construct()
+		public function __construct($post_types)
 		{
 			global $wpdb;
-			$this->wpdb = &$wpdb;
+			$this->wpdb       = &$wpdb;
+			$this->post_types = $post_types;
 
 			// Load admin style sheet and JavaScript.
 			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_styles' ) );
@@ -36,6 +37,7 @@
 		public function enqueue_admin_scripts()
 		{
 			wp_enqueue_script( 'mqrp-admin-script', plugins_url('js/admin.js', __FILE__ ), array('jquery'), false, true );
+			wp_localize_script('mqrp-admin-script', 'ajax_url',  get_bloginfo('wpurl').'/wp-admin/admin-ajax.php');
 		}
 
 
