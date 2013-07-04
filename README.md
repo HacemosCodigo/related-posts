@@ -39,4 +39,4 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html<br />
 
 ### Screenshots
 
-![screenshot](https://raw.github.com/HacemosCodigo/related-posts/master/img/ejemplo1.png)
+![screenshot](https://raw.github.com/HacemosCodigo/related-posts/master/img/ejemplo.png)
