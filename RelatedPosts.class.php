@@ -75,14 +75,11 @@
 		 */
 		public function display_related_posts_metabox($post)
 		{
-
-
 			$selected = get_post_meta($post->ID, 'related-posts', true);
-			$titles   = get_post_meta($post->ID, 'related-posts-titless', true);
+			$titles   = get_post_meta($post->ID, 'related-posts-titles', true);
 
 			$selected = $selected ? $selected : array();
 			$titles   = $titles   ? $titles   : array();
-
 
 			?><div id="related-container" class="categorydiv">
 
@@ -123,7 +120,7 @@
 						$entrada = get_post($id, OBJECT); ?>
 						<li class="popular-category">
 							<label class="selectit">
-								<input value="<?php echo $entrada->ID; ?>" type="checkbox" name="post_related[]" class="post-related-title">
+								<input value="<?php echo $entrada->ID; ?>" type="checkbox" name="post_related[]" class="post-related-title" checked="checked">
 								<?php echo $entrada->post_title; ?>
 							</label>
 						</li>

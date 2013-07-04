@@ -164,9 +164,10 @@
 
 		RelatedPosts.getSimilarTitleData = function (){
 			var posts = [];
-			$('.post-related-title').each(function (index){
+			var index = 0;
+			$('.post-related-title').each(function (i) {
 				if( $(this).is(':checked') ){
-					posts[index] = $(this).val();
+					posts[index++] = parseInt( $(this).val(), 10 );
 				}
 			});
 			return posts;
@@ -181,6 +182,7 @@
 			}, 'json' );
 			return ajax_result;
 		};
+
 
 		RelatedPosts.getCurrentPostID = function () {
 			return $('#current-post-id').val();
@@ -230,28 +232,28 @@
 			var post_id = RelatedPosts.getCurrentPostID();
 
 			// savePostMeta( post_id, meta_key, meta_value )
-			var meta_value = RelatedPosts.getSeleccionadosData();
+			var meta_value1 = RelatedPosts.getSeleccionadosData();
 			var selected = RelatedPosts.savePostMeta(
 				post_id,
 				'related-posts',
-				meta_value
+				meta_value1
 			);
 
-			var meta_value = RelatedPosts.getSimilarTitleData();
-			var titles = RelatedPosts.savePostMeta(
-				post_id,
-				'related-posts-titles',
-				meta_value
-			);
+			var meta_value2, titles;
 
-			selected.done(function (data){
-				//console.log(data);
-			});
+			selected.done(function (data) {
 
-			titles.done(function (data){
-				setTimeout(function(){
-					$('form#post').submit()
-				},500);
+				meta_value2 = RelatedPosts.getSimilarTitleData();
+				titles = RelatedPosts.savePostMeta(
+					post_id,
+					'related-posts-titles',
+					meta_value2
+				).done(function (data) {
+					console.log(data);
+					setTimeout(function () {
+						$('form#post').submit();
+					}, 500 );
+				});
 			});
 
 		});

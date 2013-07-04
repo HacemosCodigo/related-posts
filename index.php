@@ -53,7 +53,7 @@
 		$post_id    = isset($_POST['post_id'])    ? $_POST['post_id']    : '';
 		$meta_key   = isset($_POST['meta_key'])   ? $_POST['meta_key']   : '';
 		$meta_value = isset($_POST['meta_value']) ? $_POST['meta_value'] : '';
-		$result   = update_post_meta( $post_id, $meta_key, $meta_value );
+		$result     = update_post_meta( $post_id, $meta_key, $meta_value );
 		echo json_encode($result);
 		exit;
 	}
