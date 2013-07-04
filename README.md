@@ -1,6 +1,6 @@
 WP Related Posts
 ===================
-![screenshot](https://raw.github.com/HacemosCodigo/related-posts/master/img/screenshot.png)
+![screenshot](https://raw.github.com/HacemosCodigo/related-posts/master/img/logo_maquila.png)
 
 WordPress related posts plugin
 http://hacemoscodigo.com
@@ -38,3 +38,5 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html<br />
 	3. Mostrar los posts.
 
 ### Screenshots
+
+![screenshot](https://raw.github.com/HacemosCodigo/related-posts/master/img/ejemplo1.png)
