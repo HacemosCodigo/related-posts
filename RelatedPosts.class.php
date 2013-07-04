@@ -9,7 +9,6 @@
 		private $wpdb;
 
 
-
 		public function __construct()
 		{
 			global $wpdb;
@@ -37,7 +36,8 @@
 		public function enqueue_admin_scripts()
 		{
 			wp_enqueue_script( 'jquery-ui-autocomplete' );
-			wp_enqueue_script( 'mqrp-admin-script', plugins_url('js/admin.js', __FILE__ ), array('jquery', 'jquery-ui-autocomplete'), false, true );
+			wp_enqueue_script( 'mqrp-related_posts', plugins_url('js/related_posts.js', __FILE__ ), array('jquery', 'jquery-ui-autocomplete'), false, true );
+			wp_enqueue_script( 'mqrp-admin-script', plugins_url('js/admin.js', __FILE__ ), array('mqrp-related_posts'), false, true );
 		}
 
 
@@ -76,7 +76,20 @@
 		 */
 		public function display_related_posts_metabox($post)
 		{
+
+
+			$selected = get_post_meta($post->ID, 'related-posts', true);
+			$titles   = get_post_meta($post->ID, 'related-posts-titless', true);
+
+			$selected = $selected ? $selected : array();
+			$titles   = $titles   ? $titles   : array();
+
+
 			?><div id="related-container" class="categorydiv">
+
+
+				<input type="hidden" id="current-post-id" value="<?php echo $post->ID; ?>">
+
 				<ul id="related" class="category-tabs">
 					<li class="tabs"><a href="#posts-select">Seleccionar</a></li>
 					<li><a href="#posts-titles">Por Titulo  <span id="spinner_related" class="spinner"></span></a></li>
@@ -89,18 +102,17 @@
 					</p>
 
 					<div id="tagchecklist_related" class="tagchecklist">
+						<?php foreach ($selected as $id) {
+							$entrada = get_post($id, OBJECT); ?>
+							<span>
+								<a id="post-relacionado-<?php echo $entrada->ID; ?>" class="ntdelbutton related-post" data-id="<?php echo $p->ID; ?>">X</a>
+								&nbsp;<?php echo $entrada->post_title; ?>
+							</span>
+						<?php } ?>
 						<!--
 						<span>
 							<a id="post_tag-check-num-0" class="ntdelbutton delete-related-post">X</a>
 							&nbsp;La cabeza de Xbox se va a Zynga
-						</span>
-						<span>
-							<a id="post_tag-check-num-1" class="ntdelbutton delete-related-post">X</a>
-							&nbsp;¿Cómo sacarle el mayor provecho a la batería de tu celular?
-						</span>
-						<span>
-							<a id="post_tag-check-num-2" class="ntdelbutton delete-related-post">X</a>
-							&nbsp;Científicos crean un traje capaz de aumentar la fuerza humana
 						</span>
 						-->
 					</div><!-- tagchecklist -->
@@ -108,15 +120,22 @@
 
 				<div id="posts-titles" class="tabs-panel" style="display:none;">
 					<ul id="related-posts-ul" class="categorychecklist form-no-clear">
-					<!-- 	<li class="popular-category"><label class="selectit"><input value="1" type="checkbox" name="post_related[]" checked="checked"> Title 1</label></li>
-						<li class="popular-category"><label class="selectit"><input value="2" type="checkbox" name="post_related[]"> Title 2</label></li>
-						<li class="popular-category"><label class="selectit"><input value="3" type="checkbox" name="post_related[]"> Title 3</label></li> -->
+					<?php foreach ($titles as $id) {
+						$entrada = get_post($id, OBJECT); ?>
+						<li class="popular-category">
+							<label class="selectit">
+								<input value="<?php echo $entrada->ID; ?>" type="checkbox" name="post_related[]" class="post-related-title">
+								<?php echo $entrada->post_title; ?>
+							</label>
+						</li>
+					<?php } ?>
+						<!-- <li class="popular-category"><label class="selectit"><input value="1" type="checkbox" name="post_related[]" checked="checked"> Title 1</label></li> -->
 					</ul>
 				</div>
 			</div>
 			<script id="template-post-related" type="text/template">
 				<span>
-					<a id="post_tag-check-num-{{id}}" class="ntdelbutton delete-related-post">X</a>
+					<a id="post-relacionado-{{id}}" class="ntdelbutton related-post" data-id="{{id}}">X</a>
 					&nbsp;{{title}}
 				</span>
 			</script>

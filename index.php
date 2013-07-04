@@ -34,7 +34,7 @@
 
 
 
-	function get_all_posts(){
+	function mq_get_all_posts(){
 		global $wpdb;
 		$results = $wpdb->get_results(
 			"SELECT ID as value, post_title as label FROM wp_posts
@@ -44,5 +44,26 @@
 		echo json_encode($results);
 		exit;
 	}
-	add_action('wp_ajax_get_all_posts', 'get_all_posts');
-	add_action('wp_ajax_nopriv_get_all_posts', 'get_all_posts');
+	add_action('wp_ajax_mq_get_all_posts', 'mq_get_all_posts');
+	add_action('wp_ajax_nopriv_mq_get_all_posts', 'mq_get_all_posts');
+
+
+
+	function mq_save_post_meta(){
+		$post_id    = isset($_POST['post_id'])    ? $_POST['post_id']    : '';
+		$meta_key   = isset($_POST['meta_key'])   ? $_POST['meta_key']   : '';
+		$meta_value = isset($_POST['meta_value']) ? $_POST['meta_value'] : '';
+		$result   = update_post_meta( $post_id, $meta_key, $meta_value );
+		echo json_encode($result);
+		exit;
+	}
+	add_action('wp_ajax_mq_save_post_meta', 'mq_save_post_meta');
+	add_action('wp_ajax_nopriv_mq_save_post_meta', 'mq_save_post_meta');
+
+
+
+	function mq_get_related_posts($post_id){
+		$related_posts  = get_post_meta( $post_id, 'related-posts', true );
+		$related_titles = get_post_meta( $post_id, 'related-posts-titles', true );
+		return array_merge( $related_posts, $related_titles );
+	}
