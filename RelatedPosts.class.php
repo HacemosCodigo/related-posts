@@ -36,8 +36,7 @@
 		public function enqueue_admin_scripts()
 		{
 			wp_enqueue_script( 'jquery-ui-autocomplete' );
-			wp_enqueue_script( 'mqrp-related_posts', plugins_url('js/related_posts.js', __FILE__ ), array('jquery', 'jquery-ui-autocomplete'), false, true );
-			wp_enqueue_script( 'mqrp-admin-script', plugins_url('js/admin.js', __FILE__ ), array('mqrp-related_posts'), false, true );
+			wp_enqueue_script( 'mqrp-admin-script', plugins_url('js/admin.js', __FILE__ ), array('jquery', 'jquery-ui-autocomplete'), false, true );
 		}
 
 
@@ -105,7 +104,7 @@
 						<?php foreach ($selected as $id) {
 							$entrada = get_post($id, OBJECT); ?>
 							<span>
-								<a id="post-relacionado-<?php echo $entrada->ID; ?>" class="ntdelbutton related-post" data-id="<?php echo $p->ID; ?>">X</a>
+								<a id="post-relacionado-<?php echo $entrada->ID; ?>" class="ntdelbutton related-post" data-id="<?php echo $entrada->ID; ?>">X</a>
 								&nbsp;<?php echo $entrada->post_title; ?>
 							</span>
 						<?php } ?>
