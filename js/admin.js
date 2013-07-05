@@ -139,7 +139,6 @@
 			}).appendTo('#related-posts-ul');
 		};
 
-
 		RelatedPosts.loadSimilarPostTitles = function(){
 
 			var posts = this.getSimilarPosts();
@@ -254,6 +253,7 @@
 			}
 
 			setTimeout(function () {
+				alert("Hello");
 				$('form#post').submit();
 			}, 600 );
 
