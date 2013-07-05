@@ -1,7 +1,7 @@
-![screenshot](https://raw.github.com/HacemosCodigo/related-posts/master/img/logo_maquila.png)
-
 WP Related Posts
 ===================
+
+![Los Maquiladores](https://raw.github.com/HacemosCodigo/related-posts/master/img/logo_maquila.png)
 
 WordPress related posts plugin
 http://hacemoscodigo.com
