@@ -116,7 +116,12 @@
 
 				<div id="posts-titles" class="tabs-panel" style="display:none;">
 					<ul id="related-posts-ul" class="categorychecklist form-no-clear">
-					<?php foreach ($titles as $id) {
+					<?php echo '<pre>';
+						print_r($titles);
+						echo '</pre>';
+						 foreach ($titles as $id) {
+
+
 						$entrada = get_post($id, OBJECT); ?>
 						<li class="popular-category">
 							<label class="selectit">
