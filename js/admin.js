@@ -227,36 +227,39 @@
 		 * Guardar metadata
 		 */
 		$('input#publish').on('click', function (e) {
-			e.preventDefault();
 
-			var post_id = RelatedPosts.getCurrentPostID();
+			var post_id     = RelatedPosts.getCurrentPostID();
 
-			// savePostMeta( post_id, meta_key, meta_value )
 			var meta_value1 = RelatedPosts.getSeleccionadosData();
-			var selected = RelatedPosts.savePostMeta(
-				post_id,
-				'related-posts',
-				meta_value1
-			);
+			if ( meta_value1.length >= 1 ) {
+				e.preventDefault();
+				// savePostMeta( post_id, meta_key, meta_value )
+				var selected = RelatedPosts.savePostMeta(
+					post_id,
+					'related-posts',
+					meta_value1
+				);
+			}
 
-			var meta_value2, titles;
 
-			selected.done(function (data) {
+			var meta_value2 = RelatedPosts.getSimilarTitleData();
+			if ( meta_value2.length >= 1 ) {
+				e.preventDefault();
 
-				meta_value2 = RelatedPosts.getSimilarTitleData();
-				titles = RelatedPosts.savePostMeta(
+				var titles = RelatedPosts.savePostMeta(
 					post_id,
 					'related-posts-titles',
 					meta_value2
-				).done(function (data) {
-					console.log(data);
-					setTimeout(function () {
-						$('form#post').submit();
-					}, 500 );
-				});
-			});
+				);
+			}
+
+			setTimeout(function () {
+				$('form#post').submit();
+			}, 600 );
+
 
 		});
+
 
 
 	});
