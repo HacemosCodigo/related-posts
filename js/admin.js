@@ -173,13 +173,15 @@
 		};
 
 		RelatedPosts.savePostMeta = function (post_id, meta_key, meta_value) {
-			var ajax_result = $.post( ajax_url, {
-				post_id    : post_id,
-				meta_key   : meta_key,
-				meta_value : meta_value,
-				action     : 'mq_save_post_meta'
-			}, 'json' );
-			return ajax_result;
+			if ( meta_value.length > 0 ) {
+				var ajax_result = $.post( ajax_url, {
+					post_id    : post_id,
+					meta_key   : meta_key,
+					meta_value : meta_value,
+					action     : 'mq_save_post_meta'
+				}, 'json' );
+				return ajax_result;
+			}
 		};
 
 
@@ -219,45 +221,6 @@
 		 */
 		$('div#titlewrap #title').on('keyup', function(){
 			$('ul#related a').trigger('click');
-		});
-
-
-		/**
-		 * Guardar metadata
-		 */
-		$('input#publish').on('click', function (e) {
-
-			var post_id     = RelatedPosts.getCurrentPostID();
-
-			var meta_value1 = RelatedPosts.getSeleccionadosData();
-			if ( meta_value1.length >= 1 ) {
-				e.preventDefault();
-				// savePostMeta( post_id, meta_key, meta_value )
-				var selected = RelatedPosts.savePostMeta(
-					post_id,
-					'related-posts',
-					meta_value1
-				);
-			}
-
-
-			var meta_value2 = RelatedPosts.getSimilarTitleData();
-			if ( meta_value2.length >= 1 ) {
-				e.preventDefault();
-
-				var titles = RelatedPosts.savePostMeta(
-					post_id,
-					'related-posts-titles',
-					meta_value2
-				);
-			}
-
-			setTimeout(function () {
-				alert("Hello");
-				$('form#post').submit();
-			}, 600 );
-
-
 		});
 
 
