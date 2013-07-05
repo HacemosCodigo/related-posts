@@ -68,7 +68,9 @@
 			}
 		}
 
-
+		/**
+		 * Guardar metadata de los posts relacionados
+		 */
 		public function save_related_posts_meta($post_id){
 			if( !current_user_can('edit_page', $post_id)){
 				return $post_id;

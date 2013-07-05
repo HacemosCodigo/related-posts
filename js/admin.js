@@ -106,7 +106,7 @@
 			var post_title = $('div#titlewrap #title').val(); // tomar el titulo del post
 			if( post_title === ''){ return false; }
 
-				post_title = post_title.replace(/\b[a-zA-Z0-9]{1,3}\b/g, ''); // quitar palabras de 3 letras o menos
+				post_title = post_title.replace(/\b[a-zA-Z0-9]{1,2}\b/g, ''); // quitar palabras de 3 letras o menos
 			var words = post_title.split(' ');                                // poner cada palabra en el array
 				words = words.filter( function (word) { return word } );      // quitar elementos vacios del array
 
