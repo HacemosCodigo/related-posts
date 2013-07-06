@@ -55,7 +55,8 @@
 
 
 	function mq_get_related_posts($post_id){
-		$related_posts  = get_post_meta( $post_id, 'related_posts', false );
-		$related_titles = get_post_meta( $post_id, 'related_posts_titles', false );
+		$related_posts  = get_post_meta( $post_id, 'related_posts', true );
+		$related_titles = get_post_meta( $post_id, 'related_posts_titles', true );
+
 		return array_merge( $related_posts, $related_titles );
 	}
