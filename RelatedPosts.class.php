@@ -98,7 +98,7 @@
 		 */
 		public function display_related_posts_metabox($post)
 		{
-			require_once('metabox-related-posts.php');
+			require_once('inc/metabox-related-posts.php');
 		}
 
 	}

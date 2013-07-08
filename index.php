@@ -58,5 +58,7 @@
 		$related_posts  = get_post_meta( $post_id, 'related_posts', true );
 		$related_titles = get_post_meta( $post_id, 'related_posts_titles', true );
 
+		$related_titles = $related_titles ? $related_titles : array();
+
 		return array_merge( $related_posts, $related_titles );
 	}
