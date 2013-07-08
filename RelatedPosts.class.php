@@ -18,6 +18,25 @@
 			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_styles' ) );
 			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_scripts' ) );
 			add_action( 'admin_enqueue_scripts', array( $this, 'localize_admin_scripts' ) );
+
+			register_uninstall_hook( __FILE__, array( 'RelatedPosts', 'uninstall_hook_callback' ) );
+		}
+
+
+		public static function uninstall_hook_callback()
+		{
+			$this->wpdb->delete(
+				$this->wpdb->postmeta,
+				array(
+					'meta_key' => 'related_posts',
+					'meta_key' => 'related_posts_titles'
+				)
+			);
+		}
+
+		public function load_plugin_languages()
+		{
+			load_plugin_textdomain( 'related-posts', false,  plugins_url('lang', __FILE__ ) );
 		}
 
 
@@ -53,13 +72,13 @@
 		 * Registrar los metaboxes para cada post type
 		 * @param $post_types Array
 		 */
-		public function add_related_posts_metabox()
+		public function add_related_posts_metabox(	)
 		{
 			$post_types = array('post', 'videos', 'resenas');
 			foreach ($post_types as $post_type) {
 				add_meta_box(
 					'related-posts',
-					'Posts Relacionados',
+					__('Posts Relacionados', 'related-posts'),
 					array('RelatedPosts', 'display_related_posts_metabox'), //callback
 					$post_type,
 					'side'
@@ -100,7 +119,7 @@
 		 */
 		public function display_related_posts_metabox($post)
 		{
-			require_once('metabox/related-posts.php');
+			require_once('lib/metabox.php');
 		}
 
 	}

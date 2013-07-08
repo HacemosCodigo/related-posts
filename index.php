@@ -1,22 +1,21 @@
 <?php
 /**
- * WordPress Related Posts
+ * Maquiladores Related Posts
  *
  * Descripción detallada ...
  *
- * @package   related-posts
- * @author    Los Maquiladores <info@losmaquiladores.com>
- * @link      http://hacemoscodigo.com
+ * @package maquiladores-related-posts
+ * @author  Los Maquiladores <info@losmaquiladores.com>
+ * @link    http://hacemoscodigo.com
  *
  * @wordpress-plugin
- * Plugin Name: related-posts
- * Plugin URI:  git@github.com:HacemosCodigo/related-posts.git
+ * Plugin Name: Maquiladores Related Posts
+ * Plugin URI:  http://hacemoscodigo.github.io/related-posts/
  * Description: Se pueden relacionar posts por título o seleccionar a mano.
  * Version:     1.0
  * Author:      Los Maquiladores
  * Author URI:  http://hacemoscodigo.com
  */
-
 
 	require_once('RelatedPosts.class.php');
 
@@ -36,6 +35,11 @@
 	});
 
 
+	add_action('plugins_loaded', function(){
+		RelatedPosts::load_plugin_languages();
+	});
+
+
 	function mq_get_all_posts(){
 		global $wpdb;
 		$results = $wpdb->get_results(
@@ -48,6 +52,7 @@
 	}
 	add_action('wp_ajax_mq_get_all_posts', 'mq_get_all_posts');
 	add_action('wp_ajax_nopriv_mq_get_all_posts', 'mq_get_all_posts');
+
 
 
 	function get_related_posts_by_term($post_id){
@@ -81,5 +86,4 @@
 			$related_titles = $related_titles ? $related_titles : array();
 			return array_merge( $related_posts, $related_titles );
 		}
-
 	}
