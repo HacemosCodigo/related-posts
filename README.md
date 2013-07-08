@@ -4,7 +4,7 @@ WP Related Posts
 ![Los Maquiladores](https://raw.github.com/HacemosCodigo/related-posts/master/img/logo_maquila.png)
 
 WordPress related posts plugin
-http://hacemoscodigo.com
+http://hacemoscodigo.github.io/related-posts
 
 ### Credits
 
