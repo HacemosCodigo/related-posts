@@ -93,7 +93,7 @@
 		};
 
 
-		RelatedPosts.filterDuplicatedCheckboxes  = function (posts) {
+		RelatedPosts.filterDuplicatedCheckboxes = function (posts) {
 			var exclude = this.get_items_to_exclude();
 			var unique  = posts.filter(function (post) {
 				return ( $.inArray(post.value, exclude) === -1 );
@@ -102,20 +102,24 @@
 		};
 
 
+		RelatedPosts.stringToArray = function (string) {
+				string = string.replace(/\b[a-zA-Z0-9]{1,2}\b/g, '');     // quitar palabras de 3 letras o menos
+			var words  = string.split(' ');                               // poner cada palabra en el array
+				words  = words.filter( function (word) { return word } ); // quitar elementos vacios del array
+			return words;
+		};
+
+
 		RelatedPosts.getSimilarPosts = function () {
 			var post_title = $('div#titlewrap #title').val(); // tomar el titulo del post
 			if( post_title === ''){ return false; }
 
-				post_title = post_title.replace(/\b[a-zA-Z0-9]{1,2}\b/g, ''); // quitar palabras de 3 letras o menos
-			var words = post_title.split(' ');                                // poner cada palabra en el array
-				words = words.filter( function (word) { return word } );      // quitar elementos vacios del array
+			var words = this.stringToArray(post_title);
 
 			var posts = RelatedPosts.Posts.filter(function (post) {
 				var include = false;
 				$.each(words, function (index, word) {
-					if ( new RegExp(word,'i').test(post.label) ){
-						include = true;
-					}
+					if ( new RegExp(word,'i').test(post.label) ){ include = true; }
 				});
 				return include;
 			});
@@ -123,11 +127,13 @@
 			return RelatedPosts.filterDuplicatedCheckboxes(posts);
 		};
 
+
 		RelatedPosts.get_items_to_exclude = function () {
 			var items = [];
 			$('input.post-related-title').each(function (index, value) {
 				items[index] = $(value).val();
 			});
+			items.push( this.getCurrentPostID() ); // exluir el current post id de los resultados
 			return items;
 		};
 
@@ -139,10 +145,16 @@
 			}).appendTo('#related-posts-ul');
 		};
 
+
+
+		RelatedPosts.cleanErrors = function(){
+			$('#related-posts-ul').find('.howto').remove();
+		};
+
+
 		RelatedPosts.loadSimilarPostTitles = function(){
-
 			var posts = this.getSimilarPosts();
-
+			this.cleanErrors();
 			if ( ! posts ) {
 				RelatedPosts.checkboxError('Ingresa el titulo del post');
 			}else{
@@ -183,7 +195,6 @@
 				return ajax_result;
 			}
 		};
-
 
 		RelatedPosts.getCurrentPostID = function () {
 			return $('#current-post-id').val();

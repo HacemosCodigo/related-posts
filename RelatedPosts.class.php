@@ -49,14 +49,13 @@
 		}
 
 
-
-
 		/**
 		 * Registrar los metaboxes para cada post type
 		 * @param $post_types Array
 		 */
-		public function add_related_posts_metabox($post_types)
+		public function add_related_posts_metabox()
 		{
+			$post_types = array('post', 'videos', 'resenas');
 			foreach ($post_types as $post_type) {
 				add_meta_box(
 					'related-posts',
@@ -68,16 +67,19 @@
 			}
 		}
 
+
 		/**
 		 * Guardar metadata de los posts relacionados
 		 */
-		public function save_related_posts_meta($post_id){
-			if( !current_user_can('edit_page', $post_id)){
+		public function save_related_posts_meta($post_id)
+		{
+			if( !current_user_can('edit_page', $post_id) ){
 				return $post_id;
 			}
-			if(defined('DOING_AUTOSAVE') and DOING_AUTOSAVE){
+			if( defined('DOING_AUTOSAVE') and DOING_AUTOSAVE ){
 				return $post_id;
 			}
+
 			if ( isset($_POST['related_posts']) ){
 				update_post_meta( $post_id, 'related_posts', $_POST['related_posts'] );
 			}else{
@@ -98,7 +100,7 @@
 		 */
 		public function display_related_posts_metabox($post)
 		{
-			require_once('inc/metabox-related-posts.php');
+			require_once('metabox/related-posts.php');
 		}
 
 	}
