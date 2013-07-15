@@ -70,6 +70,7 @@
 							WHERE ID = '$post_id'
 				)
 				AND post_status = 'publish'
+				AND ID != $post_id
 					ORDER BY RAND()
 						LIMIT 3;");
 	}
