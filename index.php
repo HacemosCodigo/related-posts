@@ -9,7 +9,7 @@
  * @link    http://hacemoscodigo.com
  *
  * @wordpress-plugin
- * Plugin Name: Maquiladores Related Posts
+ * Plugin Name: WordPress Related Posts
  * Plugin URI:  http://hacemoscodigo.github.io/related-posts/
  * Description: Se pueden relacionar posts por título o seleccionar a mano.
  * Version:     1.0
@@ -62,17 +62,16 @@
 				INNER JOIN wp_term_relationships AS tr ON object_id = ID
 				INNER JOIN wp_term_taxonomy AS tt ON tr.term_taxonomy_id = tt.term_taxonomy_id
 				INNER JOIN wp_terms AS t ON tt.term_id = t.term_id
-				WHERE t.term_id IN (
-					SELECT t.term_id FROM wp_posts
-						INNER JOIN wp_term_relationships AS tr ON object_id = ID
-						INNER JOIN wp_term_taxonomy AS tt ON tr.term_taxonomy_id = tt.term_taxonomy_id
-						INNER JOIN wp_terms AS t ON tt.term_id = t.term_id
-							WHERE ID = '$post_id'
-				)
-				AND post_status = 'publish'
-				AND ID != $post_id
-					ORDER BY RAND()
-						LIMIT 3;");
+					WHERE t.term_id IN (
+						SELECT t.term_id FROM wp_posts
+							INNER JOIN wp_term_relationships AS tr ON object_id = ID
+							INNER JOIN wp_term_taxonomy AS tt ON tr.term_taxonomy_id = tt.term_taxonomy_id
+							INNER JOIN wp_terms AS t ON tt.term_id = t.term_id
+								WHERE ID = '$post_id'
+					)
+					AND post_status = 'publish'
+						ORDER BY RAND()
+							LIMIT 3;");
 	}
 
 
