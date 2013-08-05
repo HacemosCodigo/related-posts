@@ -34,7 +34,7 @@
 			);
 		}
 
-		public function load_plugin_languages()
+		public static function load_plugin_languages()
 		{
 			load_plugin_textdomain( 'related-posts', false,  plugins_url('lang', __FILE__ ) );
 		}
@@ -72,7 +72,7 @@
 		 * Registrar los metaboxes para cada post type
 		 * @param $post_types Array
 		 */
-		public function add_related_posts_metabox(	)
+		public static function add_related_posts_metabox(	)
 		{
 			$post_types = array('post', 'videos', 'resenas');
 			foreach ($post_types as $post_type) {
@@ -117,7 +117,7 @@
 		 * add_related_posts_metabox callback function: muestra el metabox
 		 * @param $post WP_Post object
 		 */
-		public function display_related_posts_metabox($post)
+		public static function display_related_posts_metabox($post)
 		{
 			require_once('lib/metabox.php');
 		}
