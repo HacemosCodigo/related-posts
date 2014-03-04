@@ -48,7 +48,11 @@
 					AND post_type != 'attachment';", OBJECT
 		);
 		echo json_encode($results);
-		exit;
+		
+		if ( defined( 'DOING_AJAX' ) && DOING_AJAX )
+			wp_die();
+	        else
+			die;
 	}
 	add_action('wp_ajax_mq_get_all_posts', 'mq_get_all_posts');
 	add_action('wp_ajax_nopriv_mq_get_all_posts', 'mq_get_all_posts');
